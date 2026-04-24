@@ -42,11 +42,12 @@
 
     \item
 
-    Every education group migrates at lower rates in 2024 than in 2000. The high-school-only rate falls from 2.04\% to 1.79\%, and the post-BA rate falls from 4.53\% to 3.47\%. More educated workers move more in every year, but all five series drift down together.
+    Every education group migrates at lower rates in 2024 than in 2000. 
+    The high-school-only rate falls from 2.04\% to 1.79\%, and the post-BA rate falls from 4.53\% to 3.47\%. 
+    More educated workers move more in every year, but all five series drift down together.
+    The patterns point to a broad-based decline in interstate mobility, which clearly was kicked off by the great recession but never recovered. 
+    So while there are cultural and behavioral mechanisms at play here, clearly macroeconomic and labor market factors also have something to do with people's migration decisions.
 
-    \item 
-
-    The pattern points to a broad mobility decline, not a change confined to one part of the education distribution. That pushes me toward explanations that affect moving costs or moving returns for many workers at once, rather than a story specific to one skill group.
 \end{enumerate}
 
 \item What are some possible reasons why inter-state mobility has declined, and how would I test those theories?
@@ -54,13 +55,13 @@
 \begin{enumerate}[label=(\roman*)]
     \item 
 
-    Housing costs and supply restrictions make it harder to move into high-productivity places \cite{ganong_why_2017}. 
-    One test is to interact migration rates with local house-price growth, rent growth, and Saiz-style supply elasticity, then check whether migration has become more sensitive to housing costs over time.
+    Housing cost growth and supply restrictions have made it increasingly harder to move into high-productivity places \cite{ganong_why_2017}. 
+    One test is to interact migration rates with local house-price growth, rent growth, and external measures of housingsupply elasticities \cite{saiz_geographic_2010}, then check whether migration has become more sensitive to housing costs over time.
 
     \item 
 
     The return to moving for work may have fallen for two related reasons. 
-    The income gains from moving may have fallen because locations have become more similar on observable and unobservable dimensions \cite{kaplan_understanding_2017}, and job-to-job transitions may have slowed \cite{molloy_job_2017}.
+    The income gains from moving may have fallen because locations have become more similar on observable and unobservable dimensions \cite{kaplan_understanding_2017}, and job-to-job transitions may have slowed \cite{molloy_job_2017}, which will mechanically reduce work-related migration, which is almost certainly a large part of interstate migration.
     To test this mechanism, I would compare the migration response to local employment shocks across decades and check whether migration rates move with job-changing rates.
 
     \item 
@@ -68,11 +69,13 @@
     Household ties and place-specific amenities may be a third factor. 
     There is substantial evidence that people do not leave depressed places at the rate they ``should'', suggesting 
     local ties or place-specific amenities keeping them there \cite{zabek_local_2024}. 
-    I would use state of birth, the closest proxy available in ACS, and check whether the share of people still living in their birth state has risen over time. A cleaner alternative within these data is to compare migration trends for homeowners versus renters, since homeownership is a standard proxy for rootedness.
+    I would use state of birth, the closest proxy available in ACS, and check whether the share of people still living in their birth state has risen over time.
+    I could similarly look at local employment shocks over time, and see if the relative likelihood to migrate of those who were born in a state vs. those who weren't changes over time, 
+    to test if local ties are becoming increasingly important in migration decisions. 
 
     \item 
 
-    For a full test, I would merge the ACS repeated cross-sections with local labor-market and housing data, so these mechanisms can be tested in the same regression framework. 
+    For a full test, I would merge the ACS repeated cross-sections with regional local labor-market and housing data, so these mechanisms can be tested in the same regression framework. 
     The decline here is consistent with the earlier evidence in \cite{molloy_internal_2011}.
 \end{enumerate}
 
@@ -82,13 +85,8 @@
     \item 
 
     The sample is individuals ages 25 to 54, born in the United States, living in households. I exclude group quarters.
-
-    \item 
-    I rank MSAs by weighted 2006 population using current MSA of residence and keep the top 75. The five largest are New York, Chicago, Los Angeles, Philadelphia, and Dallas-Fort Worth.
-
-    \item 
-
-    The top-75 list is frozen at 2006 and used as the focal set for all later MSA comparisons.
+    I rank MSAs by weighted 2006 population using current MSA of residence and keep the top 75. 
+    The five largest are New York, Chicago, Los Angeles, Philadelphia, and Dallas-Fort Worth, and I use that top-75 list for the rest of the assignment. 
 \end{enumerate}
 
 \item For each of the 75 large MSAs, define total population, inflows, and outflows for 2006, 2010, and 2019.
@@ -97,10 +95,6 @@
     \item 
 
     Population is the weighted count of the focal sample in the MSA. Inflows are movers currently in the focal MSA whose prior MSA is identifiable and different. Outflows are movers whose prior MSA is the focal MSA and whose current MSA is identifiable and different. The focal set is the 2006 top 75 MSAs, but the non-focal side of the move can be any identifiable MSA in the ACS, not only another top-75 MSA. Moves involving abroad, non-MSA, or unidentified origins or destinations are excluded from these strict MSA-to-MSA flow counts. If a focal MSA has no positive prior-MSA support in a year, I leave outflows and both flow rates missing rather than setting them to zero.
-
-    \item 
-
-    The 2010 and 2019 versions use the same 2006 top-75 list and the same definitions. 
 
 \end{enumerate}
 
@@ -111,8 +105,12 @@
 
     \begin{table}[H]
     \input{output/hw3_gross_flow_top10_2006_table.tex}
-    \caption{Top 10 gross flow rates in 2006. New Orleans is a Katrina-displacement outlier and should not be read as a normal high-churn case.}
-    \tabnote{Sample is the top 75 MSAs by weighted 2006 population among U.S.-born household residents ages 25 to 54. Gross flow rate is $(\text{inflows}+\text{outflows})/\text{population}$. The non-focal side of a move may be any identifiable MSA. Flows exclude abroad, non-MSA, and unidentified origins or destinations. Rankings require measurable prior-MSA origin support for the focal MSA-year.}
+    \caption{Top 10 gross flow rates in 2006.}
+    \tabnote{Sample is the top 75 MSAs by weighted 2006 population among U.S.-born household residents ages 25 to 54. Gross flow rate is $(\text{inflows}+\text{outflows})/\text{population}$. 
+    The non-focal side of a move may be any identifiable MSA. 
+    Flows exclude abroad, non-MSA, and unidentified origins or destinations. 
+    Rankings require measurable prior-MSA origin support for the focal MSA-year.
+    New Orleans is an outlier due to Hurricane Katrina-induced displacement.}
     \end{table}
 
     \item \leavevmode
@@ -125,7 +123,9 @@
 
     \item 
 
-    New Orleans tops the gross-flow table because Katrina outflows were still enormous in 2006. Baton Rouge is also likely affected by Katrina-related displacement, so I do not interpret its 2006 net inflow as a normal high-growth-metro result. New Orleans' gross flow rate is 0.236, but its net flow rate is $-0.193$. Outside the Katrina-affected entries, the 2006 lists mostly pick up high-turnover and growing Sun Belt or coastal metros.
+    New Orleans tops the gross-flow table because Katrina outflows were still enormous in 2006. 
+    Baton Rouge is also likely affected by Katrina-related displacement, so I do not interpret its 2006 net inflow as a statement about the metro's ordinary attractiveness to prospective migrants.
+    New Orleans' gross flow rate is 0.236, but its net flow rate is $-0.193$. Outside the Katrina-affected entries, the 2006 lists mostly pick up high-turnover and growing Sun Belt or coastal metros.
 \end{enumerate}
 
 \item Which MSAs had the largest increase and largest decrease in net flow rates between 2006 and 2010?
@@ -173,7 +173,7 @@
 
     \item 
 
-    By 2019, New Orleans dominates because 2006 is an abnormal base year. The largest increases include Dayton, Allentown, and Fresno, where net flows improved relative to the 2006 baseline. On the negative side, the list includes former growth or high-churn metros as well as older industrial metros.
+    By 2019, New Orleans still dominates because 2006 is a very abnormal base year. The largest increases include Dayton, Allentown, and Fresno, where net flows improved relative to the 2006 baseline. On the negative side, the list includes former growth or high-churn metros as well as older industrial metros.
 \end{enumerate}
 
 \item For each of the 75 large MSAs, define employment rates for residents, in-migrants, and out-migrants for 2005, 2010, and 2019.
@@ -191,7 +191,7 @@
     In 2019, the pooled weighted resident employment rate recovers to 0.829. In-migrant employment recovers to 0.813, while out-migrant employment recovers to 0.791. Movers remain less employed than residents, but the gap is smaller than in 2005.
     \item
 
-    Employment rates are weighted shares employed among people with valid employment-status responses. For movers, I count anyone tied to the focal MSA who moved in the last year, excluding only people explicitly observed in the same MSA one year earlier. I use the broader mover sample here because employment is observed even when one endpoint of the MSA move is not identifiable. The strict MSA-to-MSA restriction is needed for the flow-rate accounting exercise. The output folder also contains the full 75-MSA-by-year employment-rate table.
+    Employment rates are weighted shares employed among people with valid employment-status responses. For movers, I count anyone tied to the focal MSA who moved in the last year, excluding only people explicitly observed in the same MSA one year earlier. I use the broader mover sample here because employment is observed even when one endpoint of the MSA move is not identifiable. The strict MSA-to-MSA restriction is needed for the flow-rate accounting exercise.
 \end{enumerate}
 
 \item Create and interpret the two-panel scatter plot relating changes in resident employment rates to changes in mover employment rates between 2005 and 2010.
@@ -221,7 +221,7 @@
 
     \item 
 
-    The selection evidence is mostly on the out-migration side. In-migrants behave close to the no-selection benchmark. Out-migrants don't. Their employment rate is unresponsive to local conditions, meaning the people who leave a downturn MSA look more employed than a random draw of that MSA's population. That is a cross-MSA result, not the pooled average in Q8: average resident and mover employment rates fall by similar amounts, but the out-migrant drop is not larger in MSAs where resident employment fell more. 
+    The selection evidence is mostly on the out-migration side. In-migrants behave close to the no-selection benchmark. Out-migrants don't. Their employment rate is unresponsive to local conditions, meaning the people who leave a downturn MSA look more employed than a random draw of that MSA's population. 
     One interpretation is that employed workers are more likely to have outside options and therefore are less negatively selected out of declining MSAs, while lower-employment residents are more likely to remain. That is consistent with evidence that U.S. natives reallocate weakly across MSAs in response to local demand shocks \cite{cadena_immigrants_2016}.
 \end{enumerate}
 
