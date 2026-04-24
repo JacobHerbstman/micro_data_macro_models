@@ -1,12 +1,8 @@
-#setwd("/Users/jacobherbstman/Desktop/micro_data_macro_models/assignments/code")
-
 ###############################################################################
 # Homework 3: Migration Trends and Selection
-#
-# First-pass data work for the assignment. This script reads the IPUMS extract,
-# constructs the requested trend and MSA flow objects, and saves the requested
-# tables and figures for the writeup.
 ###############################################################################
+
+#setwd("/Users/jacobherbstman/Desktop/micro_data_macro_models/assignments/code")
 
 rm(list = ls())
 
@@ -17,6 +13,95 @@ library(ggplot2)
 xml_file <- "../input/User Extract usa_00012.dat.xml"
 output_dir <- "../output"
 dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
+
+latex_escape <- function(x) {
+  x <- as.character(x)
+  x[is.na(x)] <- ""
+  escaped <- vapply(
+    strsplit(x, "", useBytes = TRUE),
+    function(chars) {
+      paste0(
+        vapply(
+          chars,
+          function(ch) {
+            switch(
+              ch,
+              "\\" = "\\textbackslash{}",
+              "&" = "\\&",
+              "%" = "\\%",
+              "$" = "\\$",
+              "#" = "\\#",
+              "_" = "\\_",
+              "{" = "\\{",
+              "}" = "\\}",
+              "~" = "\\textasciitilde{}",
+              "^" = "\\textasciicircum{}",
+              ch
+            )
+          },
+          character(1)
+        ),
+        collapse = ""
+      )
+    },
+    character(1)
+  )
+  escaped
+}
+
+format_decimal <- function(x, digits = 3) {
+  sprintf(paste0("%.", digits, "f"), x)
+}
+
+write_msa_table_tex <- function(x, file_name, value_col, value_label, digits = 3) {
+  rows <- sprintf(
+    "    %s & %s %s",
+    latex_escape(x$msa_name),
+    format_decimal(x[[value_col]], digits),
+    "\\\\"
+  )
+  table_lines <- c(
+    "    \\centering",
+    "    \\small",
+    "    \\begin{tabular}{p{0.66\\textwidth}r}",
+    "    \\toprule",
+    sprintf("    MSA & %s \\\\", value_label),
+    "    \\midrule",
+    rows,
+    "    \\bottomrule",
+    "    \\end{tabular}"
+  )
+  writeLines(table_lines, file.path(output_dir, file_name), useBytes = TRUE)
+}
+
+write_selection_regression_table_tex <- function(x, file_name, digits = 3) {
+  panel_label <- fifelse(
+    grepl("In-migrant", x$panel),
+    "A: In-migrants",
+    "B: Out-migrants"
+  )
+  rows <- sprintf(
+    "    %s & %s & %s & %s & %s %s",
+    panel_label,
+    format_decimal(x$slope, digits),
+    format_decimal(x$standard_error, digits),
+    format_decimal(x$weighted_r_squared, digits),
+    format_decimal(x$p_beta_eq_1, digits),
+    "\\\\"
+  )
+  table_lines <- c(
+    "    \\centering",
+    "    \\small",
+    "    \\begin{tabular}{lrrrr}",
+    "    \\toprule",
+    "    Panel & Slope & SE & $R^2$ & $p(\\beta = 1)$ \\\\",
+    "    \\midrule",
+    rows,
+    "    \\bottomrule",
+    "    \\end{tabular}"
+  )
+  writeLines(table_lines, file.path(output_dir, file_name), useBytes = TRUE)
+}
 
 ###############################################################################
 # Read data and keep only needed variables
@@ -54,7 +139,7 @@ for (col_name in integer_cols) {
 set(dt, j = "perwt", value = as.numeric(dt[["perwt"]]))
 
 ###############################################################################
-# Early sample checks
+# Early checks and household sample restriction
 ###############################################################################
 
 cat("\nAge and birthplace checks\n")
@@ -69,9 +154,16 @@ stopifnot(max(dt$age, na.rm = TRUE) == 54L)
 stopifnot(max(dt$bpl, na.rm = TRUE) <= 56L)
 
 gq_check <- dt[, .N, by = gq][order(gq)]
-cat("\nGroup quarters tabulation\n")
-cat("------------------------\n")
+cat("\nGroup quarters tabulation before household restriction\n")
+cat("------------------------------------------------------\n")
 print(gq_check)
+
+dt <- dt[gq %in% c(1L, 2L)]
+
+gq_after <- dt[, .N, by = gq][order(gq)]
+cat("\nGroup quarters tabulation after household restriction\n")
+cat("-----------------------------------------------------\n")
+print(gq_after)
 
 ###############################################################################
 # Education groups
@@ -346,6 +438,43 @@ fwrite(
   file.path(output_dir, "hw3_net_flow_change_bottom10_2006_2019.csv")
 )
 
+write_msa_table_tex(
+  gross_flow_top10_2006,
+  "hw3_gross_flow_top10_2006_table.tex",
+  "gross_flow_rate",
+  "Gross flow rate"
+)
+write_msa_table_tex(
+  net_flow_top10_2006,
+  "hw3_net_flow_top10_2006_table.tex",
+  "net_flow_rate",
+  "Net flow rate"
+)
+write_msa_table_tex(
+  net_flow_change_top10_2006_2010,
+  "hw3_net_flow_change_top10_2006_2010_table.tex",
+  "net_flow_change_2006_2010",
+  "Change in net flow rate"
+)
+write_msa_table_tex(
+  net_flow_change_bottom10_2006_2010,
+  "hw3_net_flow_change_bottom10_2006_2010_table.tex",
+  "net_flow_change_2006_2010",
+  "Change in net flow rate"
+)
+write_msa_table_tex(
+  net_flow_change_top10_2006_2019,
+  "hw3_net_flow_change_top10_2006_2019_table.tex",
+  "net_flow_change_2006_2019",
+  "Change in net flow rate"
+)
+write_msa_table_tex(
+  net_flow_change_bottom10_2006_2019,
+  "hw3_net_flow_change_bottom10_2006_2019_table.tex",
+  "net_flow_change_2006_2019",
+  "Change in net flow rate"
+)
+
 ###############################################################################
 # Employment rates for residents, in-migrants, and out-migrants
 ###############################################################################
@@ -515,6 +644,10 @@ selection_regressions <- data.table(
 fwrite(
   selection_regressions,
   file.path(output_dir, "hw3_selection_scatter_regressions.csv")
+)
+write_selection_regression_table_tex(
+  selection_regressions,
+  "hw3_selection_scatter_regressions_table.tex"
 )
 
 cat("\nWeighted selection regressions\n")
