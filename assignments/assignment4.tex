@@ -1,0 +1,93 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{verbatim}
+\usepackage[utf8]{inputenc}
+\usepackage{dsfont}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{harvard}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\newcommand{\tabnote}[1]{%
+\par\vspace{0.25em}
+\begin{minipage}{0.92\textwidth}
+\footnotesize \emph{Notes:} #1
+\end{minipage}
+}
+
+\title{Homework 4: Short Answer Questions}
+\author{Jacob Herbstman}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Class 1: Klette and Kortum (2004)}
+
+\begin{enumerate}
+    \item No, the only state variable here is how many goods each firm produces, $n$. 
+    Firms are simply defined the portfolio of goods they produce so there is no notion of firm age in the model.
+
+    \item Since the value function solution is $V(n) = vn$, the value of additional goods in the portfolio is linear. 
+    As a result, there is no incentive to either merge or split as a firm, and innovation intensity is also linear and thus there are no incentives to change firm structure in the model.
+
+    \item Incumbents and entrants both innovate because R\&D costs are convex. 
+    Even if incumbents are better at innovating, their increasing marginal costs as innovation intensity increases implies that entrants will also innovate a nonzero amount. 
+
+    \item Innovation in this model works by taking a product from the set of $n$ goods, and either having an incumbent or an entrant innovate to improve on that good.
+    So in that sense, entrants and incumbents are substitutes, since they are both competing to innovate on any existing firm's product line.
+    Higher entry costs actually increase innovation intensity in this model by incumbents. 
+    This is because less threat of entry and stealing by a new entrant raises the value of having a given product since its less likely to be creatively destroyed, 
+    so incumbent firms actually are incentived to innovate more when entry costs are higher.
+
+\end{enumerate}
+
+\section*{Class 2: Hsieh and Klenow (2009)}
+
+    Misallocation in this paper is anything that produces a wedge between TFPR across firms in an industry.
+
+\begin{enumerate}[label=(\alph*)]
+    
+     \item Marginal tax rates are the canonical example of a wedge that produces misallocation. 
+     If some firms are subsidized relative to others, they will be suboptimally large and produce more than the efficient level of output, while the firms that are taxed relative to others will be suboptimally small and produce less than the efficient level of output.
+
+    \item Price markup dispersion is also misallocation, assuming that the dispersion is due to market power. 
+    In that case, firms with higher markups can increase prices and produce less than the socially efficient quantity. 
+    However, if the markup dispersion is due to differences in quality, that is not necessarily misallocation. 
+
+    \item Wage markdown dispersion is misallocation as well, assuming the wedge is caused by monopsony power in the labor market, 
+    analogous to the market power and pricing case from above. 
+
+    \item If a subset of firms are state-owned and not maximizing profits, they may choose inputs that don't align with what a social planner would choose.
+    For example, if a firm is subsidized by the government and losing money/can't pay debts, the social planner would want that unproductive firm to shrink, but they
+    may continue to invest in captial and hire labor, subsituting away from more productive firms, because it is insulated from the losses and market forces. 
+
+    \item Any size-dependent regulation is likely to cause misallocation, because we want productive firms to grow and unproductive firms to shrink. 
+    So if we penalize firms inherently based on size, we are likely penalizing the most productive firms, causing them to choose lower levels of inputs than the social planner would desire and 
+    causing them to be artifically small. 
+
+    \item Adjustment costs are not inherently misallocation. 
+    If they are real technologicaladjustment costs in the presence of a shock, the social planner would also face them, 
+    so there is not misallocation in that case. If the adjustment costs come from institutional frictions, then they could be a source of misallocation, 
+    but they are not inherently misallocation in the way that the other wedges are.
+
+    \item Transportation costs are not likely to be misallocation, because they deal with physical frictions of moving inputs and outputs, 
+    and the social planner also faces that physical reality. 
+
+    \item Overhead costs aren't really a form of misallocation, since the planner would also face the real fixed costs of running a firm, so they are not a wedge that causes firms to choose suboptimal levels of inputs relative to the social planner.
+\end{enumerate}
+
+
+
+
+\clearpage
+
+\bibliographystyle{aer}
+\bibliography{micro_data_macro_models.bib}
+
+\end{document}
