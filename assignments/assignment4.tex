@@ -37,7 +37,7 @@
     As a result, there is no incentive to either merge or split as a firm, and innovation intensity is also linear and thus there are no incentives to change firm structure in the model.
 
     \item Incumbents and entrants both innovate because R\&D costs are convex. 
-    Even if incumbents are better at innovating, their increasing marginal costs as innovation intensity increases implies that entrants will also innovate a nonzero amount. 
+    Increasing marginal costs as innovation intensity increases implies that entrants will also innovate a nonzero amount up to the point where the marginal cost of innovation equals the marginal benefit, which is the same for incumbents and entrants. 
 
     \item Innovation in this model works by taking a product from the set of $n$ goods, and either having an incumbent or an entrant innovate to improve on that good.
     So in that sense, entrants and incumbents are substitutes, since they are both competing to innovate on any existing firm's product line.
@@ -49,7 +49,7 @@
 
 \section*{Class 2: Hsieh and Klenow (2009)}
 
-    Misallocation in this paper is anything that produces a wedge between TFPR across firms in an industry.
+    Misallocation here is any wedge in TFPR that a social planner would eliminate by reallocating resources across firms.
 
 \begin{enumerate}[label=(\alph*)]
     
@@ -72,7 +72,7 @@
     causing them to be artifically small. 
 
     \item Adjustment costs are not inherently misallocation. 
-    If they are real technologicaladjustment costs in the presence of a shock, the social planner would also face them, 
+    If they are real technological adjustment costs in the presence of a shock, the social planner would also face them, 
     so there is not misallocation in that case. If the adjustment costs come from institutional frictions, then they could be a source of misallocation, 
     but they are not inherently misallocation in the way that the other wedges are.
 
@@ -80,14 +80,35 @@
     and the social planner also faces that physical reality. 
 
     \item Overhead costs aren't really a form of misallocation, since the planner would also face the real fixed costs of running a firm, so they are not a wedge that causes firms to choose suboptimal levels of inputs relative to the social planner.
+    
 \end{enumerate}
 
+\section*{Class 3: Hsieh and Rossi-Hansberg (2023)}
 
+\begin{enumerate}
+    \item For CES preferences, employment going up in a sector does not necessarily imply that TFP in that sector increased relative to others. 
+    If $\sigma > 1$, then sectors are substitutes, so a TFP shock that lowers prices will reallocate labor toward that sector and increase employment. 
+    However, if $\sigma < 1$, then sectors are complements, and we get something akin to Baumol's cost disease. 
+    If one sector experiences a TFP shock it will spend more money in the other sector (if it can't subsitute away, which is true with $\sigma < 1$). 
+    TFP in the sluggish sector will be lower in relative terms, but expenditure shares in that sector increase. 
+    Since expenditure shares are proportional to employment in the model, we get an increase in employment in the sluggish sector.
+    So you can easily get an employment increase in a sector that saw no change in its own TFP, and actually had a relative decrease in TFP, if it is a complement to the sector that experienced the TFP shock.
+    If $\sigma = 1$, then we have Cobb-Douglas and employment depends on factor demand, so these shares will be constant regardless of TFP.
+
+    \item No, with non-homothetic preferences, an increase in employment in the service sector does not imply that relative TFP increased in that sector. 
+    It could just be that demand for services has increased relative to demand for manufacturing/agriculture, which would cause a reallocation of labor toward the service sector without any change in relative TFP.
+
+    \item I am not sure that a flat labor share in services is consistent with the model in the paper.
+    In the model with CES and constant markups, the labor share is constant and equal to the inverse of the markup. 
+    The empirical evidence and model presented in the paper show that firms are investing in technology (fixed/sunk costs) to lower marginal costs. 
+    They also say that profits are increasing at the firm level to pay for these new investments, which would imply a falling labor share in services, which we don't see. 
+    So this model would predict that labor share is constant, or if anything it should be falling as firms invest more in technology. 
+    Since the data doesn't show this, I can't confidently say the labor share trends are consistent with the model in the paper.
+
+\end{enumerate}
 
 
 \clearpage
 
-\bibliographystyle{aer}
-\bibliography{micro_data_macro_models.bib}
 
 \end{document}
